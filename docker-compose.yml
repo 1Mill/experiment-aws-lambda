@@ -6,3 +6,5 @@ services:
     environment:
       HOST: ${MY_TEST_FUNCTION_HOST}
       PORT: ${MY_TEST_FUNCTION_PORT}
+    volumes:
+      - ./src/my-test-function:/app
