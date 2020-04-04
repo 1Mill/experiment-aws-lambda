@@ -4,7 +4,6 @@ services:
   my-test-function:
     build:
       args:
-        NODE_VERSION: ${MY_TEST_FUNCTION_NODE_VERSION}
         PORT: ${MY_TEST_FUNCTION_PORT}
       context: ./src/my-test-function
     environment:

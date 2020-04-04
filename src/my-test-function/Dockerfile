@@ -1,5 +1,4 @@
-ARG NODE_VERSION
-FROM node:${NODE_VERSION}-alpine
+FROM lambci/lambda:build-nodejs12.x
 
 WORKDIR /app
 
