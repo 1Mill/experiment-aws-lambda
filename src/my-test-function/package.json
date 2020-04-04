@@ -4,6 +4,7 @@
   "description": "Function that should run in a serverless envrionment",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
