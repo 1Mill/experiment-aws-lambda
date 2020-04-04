@@ -1,4 +1,5 @@
-FROM node:12-alpine
+ARG NODE_VERSION
+FROM node:${NODE_VERSION}-alpine
 
 WORKDIR /app
 
@@ -7,7 +8,7 @@ RUN npm install
 
 COPY index.js .
 
-ARG ${PORT}
+ARG PORT
 
 ENV HOST ${HOST}
 ENV PORT ${PORT}
