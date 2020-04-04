@@ -10,4 +10,4 @@ COPY . .
 ENV HOST ${HOST}
 ENV PORT ${PORT}
 
-CMD [ "node", "index" ]
+CMD [ "npm", "run", "start" ]
