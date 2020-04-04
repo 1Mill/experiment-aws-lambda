@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  my-test-function:
+    build: ./src/my-test-function
+    environment:
+      HOST: ${MY_TEST_FUNCTION_HOST}
+      PORT: ${MY_TEST_FUNCTION_PORT}
