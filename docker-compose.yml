@@ -1,16 +1,6 @@
 version: '3.7'
 
 services:
-  my-test-function:
-    build:
-      args:
-        PORT: ${MY_TEST_FUNCTION_PORT}
-        TAG: ${MY_TEST_FUNCTION_TAG}
-      context: ./src/my-test-function
-    environment:
-      HOST: ${MY_TEST_FUNCTION_HOST}
-      PORT: ${MY_TEST_FUNCTION_PORT}
-    ports:
-      - ${MY_TEST_FUNCTION_PORT}
-    volumes:
-      - ./src/my-test-function:/app
+  gateway:
+    build: .
+
