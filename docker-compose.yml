@@ -5,6 +5,7 @@ services:
     build:
       args:
         PORT: ${MY_TEST_FUNCTION_PORT}
+        TAG: ${MY_TEST_FUNCTION_TAG}
       context: ./src/my-test-function
     environment:
       HOST: ${MY_TEST_FUNCTION_HOST}

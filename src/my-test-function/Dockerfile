@@ -1,4 +1,5 @@
-FROM lambci/lambda:build-nodejs12.x
+ARG TAG
+FROM lambci/lambda:build-${TAG}
 
 WORKDIR /app
 
