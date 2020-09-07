@@ -6,3 +6,8 @@ services:
     volumes:
       - ./services/gateway:/app
 
+  hello-world:
+    command: index.handler
+    image: lambci/lambda:nodejs12.x
+    volumes:
+      - ./services/hello-world:/var/task:ro,delegated
