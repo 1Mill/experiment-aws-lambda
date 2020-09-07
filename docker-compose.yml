@@ -11,7 +11,7 @@ services:
       - ./services/gateway:/app
 
   hello-world:
-    command: index.handler
+    command: index.handler '{"testing":true}'
     image: lambci/lambda:nodejs12.x
     volumes:
       - ./services/hello-world:/var/task:ro,delegated
