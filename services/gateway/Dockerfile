@@ -7,6 +7,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
+ENV \
+	AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+	AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} \
+	AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
 COPY . .
 
 CMD [ "npm", "run", "start" ]
