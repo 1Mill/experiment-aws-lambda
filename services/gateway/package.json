@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.747.0"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "node index.js",
