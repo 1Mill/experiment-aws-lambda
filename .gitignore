@@ -1,5 +1,6 @@
 # General
 .env
+output.json
 
 # Node
 node_modules
