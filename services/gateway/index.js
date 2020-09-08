@@ -12,9 +12,9 @@ const lambda = new AWS.Lambda({
 
 const params = {
 	FunctionName: 'arn:aws:lambda:us-west-2:076550078650:function:deleteThisTesting',
-	InvocationType: 'RequestResponse',
+	InvocationType: 'Event',
 	LogType: 'None',
-	Payload: JSON.stringify({ testing: true }),
+	Payload: JSON.stringify({ todo: 'TODO' }), // TODO: Update to cloudevent payload
 }
 lambda.invoke(params, (err, data) => {
 	err ? console.error(err, err.stack) : console.log(data)
