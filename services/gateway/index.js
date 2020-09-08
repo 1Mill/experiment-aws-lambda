@@ -11,9 +11,8 @@ const lambda = new AWS.Lambda({
 })
 
 const params = {
-	FunctionName: 'arn:aws:lambda:us-west-2:076550078650:function:deleteThisTesting',
+	FunctionName: process.env.AWS_LAMBDA_ARN,
 	InvocationType: 'Event',
-	LogType: 'None',
 	Payload: JSON.stringify({ todo: 'TODO' }), // TODO: Update to cloudevent payload
 }
 lambda.invoke(params, (err, data) => {
