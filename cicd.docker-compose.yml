@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  terraform:
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    image: 1mill/terraform-sops:alpine-2020-09-05T04-00-37
+    volumes:
+      - ./services/hello-world:/app
