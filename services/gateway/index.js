@@ -5,8 +5,7 @@ const rapids = createEventStream({
 	id: 'gateway',
 	protocol: process.env.CLOUDEVENTS_RAPIDS_PROTOCOL,
 	urls: (process.env.CLOUDEVENTS_RAPIDS_URLS || '').split(','),
-});
-console.log(rapids)
+})
 
 AWS.config.update({
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
