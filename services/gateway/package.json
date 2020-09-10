@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@1mill/cloudevents": "^0.7.3",
     "aws-sdk": "^2.747.0"
   },
   "devDependencies": {},
