@@ -25,7 +25,7 @@ terraform {
 }
 
 data "archive_file" "default" {
-	output_path = "${path.module}/lambda.zip"
+	output_path = "${path.module}/${local.lambda_zip}"
 	source_file = "${path.module}/index.js"
 	type = "zip"
 }
@@ -42,10 +42,14 @@ data "aws_iam_policy_document" "default" {
 		}
 	}
 }
+locals {
+	lambda_zip = "terraform_lambda.zip"
+}
 resource "aws_iam_role" "default" {
 	assume_role_policy = data.aws_iam_policy_document.default.json
 }
 resource "aws_lambda_function" "default" {
+	filename = local.lambda_zip
 	function_name = "MyPlaceholderFunctionName"
 	handler = "index.handler"
 	role = aws_iam_role.default.arn
