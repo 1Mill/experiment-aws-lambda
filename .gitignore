@@ -4,6 +4,7 @@ output.json
 
 # Terraform
 .terraform
+terraform_lambda.zip
 
 # Node
 node_modules
