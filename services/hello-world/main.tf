@@ -24,6 +24,10 @@ terraform {
 	}
 }
 
+provider "aws" {
+	region = "us-west-1"
+}
+
 data "archive_file" "default" {
 	output_path = "${path.module}/${local.lambda_zip}"
 	source_file = "${path.module}/index.js"
