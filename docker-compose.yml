@@ -22,6 +22,8 @@ services:
       AWS_DEFAULT_REGION: us-west-1
       AWS_LAMBDA_ARN: arn:aws:lambda:us-west-1:076550078650:function:MyPlaceholderFunctionName
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      CLOUDEVENTS_RAPIDS_PROTOCOL: kafka
+      CLOUDEVENTS_RAPIDS_URLS: rapids:9092
     volumes:
       - ./services/gateway:/app
 
