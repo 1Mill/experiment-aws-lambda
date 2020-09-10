@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk')
-const { v2: { createEventStream } } = require('@1mill/cloudevents')
+const { v2: { createCloudevent, createEventStream } } = require('@1mill/cloudevents')
 
 const rapids = createEventStream({
 	id: 'gateway',
@@ -26,3 +26,21 @@ const params = {
 lambda.invoke(params, (err, data) => {
 	err ? console.error(err, err.stack) : console.log(data)
 })
+
+// * Listen for events from rapids
+rapids.listen({
+	handler: ({ data, isEnriched }) => {
+		if (isEnriched) { return }
+		console.log(data)
+	},
+	types: ['testing.2020-09-09']
+})
+
+// * Emit events to rapids
+setInterval(() =>{
+	const cloudevent = createCloudevent({
+		data: { myData: 'exists' },
+		type: 'testing.2020-09-09',
+	})
+	rapids.emit({ cloudevent })
+}, 5000)
