@@ -17,21 +17,21 @@ const lambda = new AWS.Lambda({
 	apiVersion: '2015-03-31',
 	// endpoint: 'http://localhost:9001/',
 })
-const params = {
-	FunctionName: process.env.AWS_LAMBDA_ARN,
-	InvocationType: 'Event',
-	Payload: JSON.stringify({ todo: 'TODO' }), // TODO: Update to cloudevent payload
-}
-
-lambda.invoke(params, (err, data) => {
-	err ? console.error(err, err.stack) : console.log(data)
-})
 
 // * Listen for events from rapids
 rapids.listen({
 	handler: ({ data, isEnriched }) => {
 		if (isEnriched) { return }
 		console.log(data)
+
+		const params = {
+			FunctionName: process.env.AWS_LAMBDA_ARN,
+			InvocationType: 'Event',
+			Payload: JSON.stringify({ todo: 'TODO' }), // TODO: Update to cloudevent payload
+		}
+		lambda.invoke(params, (err, data) => {
+			err ? console.error(err, err.stack) : console.log(data);
+		})
 	},
 	types: ['testing.2020-09-09']
 })
