@@ -1,0 +1,10 @@
+{
+  "cloudevent": {
+    "data": { "myData": "exists" },
+    "datacontenttype": "application/json",
+    "dlx": "dlx",
+    "specversion": "1.0",
+    "time": "2020-09-10T04:47:05.416Z",
+    "type": "testing.2020-09-09"
+  }
+}
