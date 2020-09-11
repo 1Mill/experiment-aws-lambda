@@ -19,14 +19,11 @@ const lambda = new AWS.Lambda({
 
 // * Listen for events from rapids
 rapids.listen({
-	handler: ({ data, isEnriched }) => {
-		if (isEnriched) { return }
-		console.log(data)
-
+	handler: ({ cloudevent }) => {
 		const params = {
 			FunctionName: process.env.AWS_LAMBDA_ARN,
 			InvocationType: 'Event',
-			Payload: JSON.stringify({ todo: 'TODO' }), // TODO: Update to cloudevent payload
+			Payload: JSON.stringify(cloudevent),
 		}
 		lambda.invoke(params, (err, data) => {
 			err ? console.error(err, err.stack) : console.log(data);
