@@ -23,7 +23,7 @@ rapids.listen({
 		const params = {
 			FunctionName: process.env.AWS_LAMBDA_ARN,
 			InvocationType: 'Event',
-			Payload: JSON.stringify(cloudevent),
+			Payload: JSON.stringify({ cloudevent }),
 		}
 		lambda.invoke(params, (err, data) => {
 			err ? console.error(err, err.stack) : console.log(data)
