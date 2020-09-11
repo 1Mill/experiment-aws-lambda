@@ -9,13 +9,13 @@
 1. Run the following command will produce an output in the `hello-world` console.
 
     ```bash
-    ./invoke.bash ./services/hello-world/cloudevent.json 9001
+    ./invoke.bash ./services/hello-world/event.json 9001
     ```
 
-1. Run the following command to generate an `output.json` file
+1. Run the following command to generate an `output.json` file if you add a `return` statment to the lambda function.
 
     ```bash
-    ./invoke.bash ./services/hello-world/cloudevent.json 9001 RequestResponse
+    ./invoke.bash ./services/hello-world/event.json 9001 RequestResponse
     ```
 
 ### Production
