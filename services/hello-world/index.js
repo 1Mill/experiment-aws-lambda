@@ -1,4 +1,6 @@
-exports.handler = async (event, _context, _callback) => {
-	console.log('EVENT: \n' + JSON.stringify(event, null, 2))
-	return { testing: 'again' }
+exports.handler = async (cloudevent, _context, _callback) => {
+	console.log("EVENT: \n" + JSON.stringify(cloudevent, null, 2))
+	console.log(cloudevent)
+
+	return cloudevent
 }
