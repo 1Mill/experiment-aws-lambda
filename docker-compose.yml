@@ -35,7 +35,7 @@ services:
     ports:
       - 9001:9001
     volumes:
-      - ./services/hello-world:/var/task:ro,delegated
+      - ./services/hello-world:/var/task
 
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.1
