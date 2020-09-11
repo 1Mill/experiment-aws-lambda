@@ -26,7 +26,7 @@ rapids.listen({
 			Payload: JSON.stringify(cloudevent),
 		}
 		lambda.invoke(params, (err, data) => {
-			err ? console.error(err, err.stack) : console.log(data);
+			err ? console.error(err, err.stack) : console.log(data)
 		})
 	},
 	types: ['testing.2020-09-09']
