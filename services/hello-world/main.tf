@@ -50,7 +50,6 @@ variable "runtime" {
 }
 
 locals {
-	function_name_prefix = "${var.name}--"
 	lambda_zip = "terraform_lambda.zip"
 }
 
@@ -83,7 +82,7 @@ resource "aws_iam_role" "default" {
 }
 resource "aws_lambda_function" "default" {
 	filename = local.lambda_zip
-	function_name = random_id.default.b64_url
+	function_name = substr("${var.name}--${random_id.default.hex}", 0, 64)
 	handler = var.handler
 	role = aws_iam_role.default.arn
 	runtime = var.runtime
@@ -95,6 +94,5 @@ resource "aws_lambda_function" "default" {
 	}
 }
 resource "random_id" "default" {
-	byte_length = 62 - (length(base64encode(local.function_name_prefix)))
-	prefix = local.function_name_prefix
+	byte_length = 32
 }
