@@ -29,7 +29,7 @@ provider "aws" {
 }
 
 variable "environment" {
-	default = []
+	default = [{ key = "TERRAFORM_PLACEHOLDER", value = "1" }]
 	type = list(object({
 		key = string
 		value = string
