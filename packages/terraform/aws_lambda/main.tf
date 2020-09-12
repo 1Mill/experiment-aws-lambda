@@ -17,6 +17,9 @@ terraform {
 	}
 }
 
+variable "directory" {
+	type = string
+}
 variable "environment" {
 	default = [{ key = "TERRAFORM_PLACEHOLDER", value = "1" }]
 	type = list(object({
@@ -46,7 +49,7 @@ data "archive_file" "default" {
 		local.lambda_zip,
 	]
 	output_path = "${path.module}/${local.lambda_zip}"
-	source_dir = "${path.module}"
+	source_dir = "${path.module}/${directory}"
 	type = "zip"
 }
 data "aws_iam_policy_document" "default" {
