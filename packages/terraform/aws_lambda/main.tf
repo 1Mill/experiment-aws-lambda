@@ -34,12 +34,10 @@ variable "runtime" {
 	type = string
 }
 variable "source_directory" {
-	default = ""
 	type = string
 }
 
 locals {
-	archive_path = var.source_directory == "" ? path.module : var.source_directory
 	lambda_zip = "terraform_lambda.zip"
 }
 
@@ -50,8 +48,8 @@ data "archive_file" "default" {
 		"main.tf",
 		local.lambda_zip,
 	]
-	output_path = "${local.archive_path}/${local.lambda_zip}"
-	source_dir = local.archive_path
+	output_path = "${var.source_directory}/${local.lambda_zip}"
+	source_dir = var.source_directory
 	type = "zip"
 }
 data "aws_iam_policy_document" "default" {
