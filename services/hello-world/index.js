@@ -5,7 +5,7 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 	if (isEnriched({ cloudevent })) { return }
 
 	// Buisness logic
-	console.log("EVENT: \n" + JSON.stringify(cloudevent, null, 2))
+	console.log('EVENT: \n' + JSON.stringify(cloudevent, null, 2))
 
 	// ! Testing purposes only
 	return cloudevent
