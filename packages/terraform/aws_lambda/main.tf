@@ -28,10 +28,6 @@ terraform {
 	}
 }
 
-provider "aws" {
-	region = "us-west-1"
-}
-
 variable "environment" {
 	default = [{ key = "TERRAFORM_PLACEHOLDER", value = "1" }]
 	type = list(object({
