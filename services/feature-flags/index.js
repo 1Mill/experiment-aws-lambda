@@ -10,7 +10,7 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 	if (isEnriched({ cloudevent })) { return }
 
 	// * Buisness logic
-	const { name } = cloudevent.data
+	const { name } = JSON.parse(cloudevent.data)
 	const enrichment = {
 		isEnabled: FLAGS[name] || false,
 		name,
