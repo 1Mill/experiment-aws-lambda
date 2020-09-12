@@ -35,6 +35,9 @@ variable "environment" {
 		value = string
 	}))
 }
+variable "runtime" {
+	type = string
+}
 
 data "archive_file" "default" {
 	excludes = [
@@ -71,7 +74,7 @@ resource "aws_lambda_function" "default" {
 	function_name = "MyPlaceholderFunctionName"
 	handler = "index.handler"
 	role = aws_iam_role.default.arn
-	runtime = "nodejs12.x"
+	runtime = var.runtime
 	source_code_hash = data.archive_file.default.output_base64sha256
 
 	environment {
