@@ -1,17 +1,6 @@
 terraform {
 	required_version = "~> 0.13.2"
 
-	backend "s3" {
-		// access_key = ENVIRONMENT AWS_ACCESS_KEY_ID
-		// region = ENVIRONMENT AWS_DEFAULT_REGION
-		// secret_key = ENVIRONMENT AWS_SECRET_ACCESS_KEY
-
-		bucket = "experiment-terraform-state"
-		dynamodb_table = "experiment-terraform-state-locks"
-		encrypt = true
-		key = "example-aws-lambda/hello-world/terraform.tfstate"
-	}
-
 	required_providers {
 		archive = {
 			source = "hashicorp/archive"
