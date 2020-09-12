@@ -27,7 +27,7 @@ module "lambda" {
 	source = "github.com/1Mill/experiment-aws-lambda.git//packages/terraform/aws_lambda"
 
 	handler = "index.handler"
-	name = "my-example-function"
+	name = "hello-world"
 	runtime = "nodejs12.x"
 	source_directory = "${path.module}"
 }
