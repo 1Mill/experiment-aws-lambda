@@ -17,10 +17,6 @@ terraform {
 	}
 }
 
-variable "directory" {
-	default = path.module
-	type = string
-}
 variable "environment" {
 	default = [{ key = "TERRAFORM_PLACEHOLDER", value = "1" }]
 	type = list(object({
@@ -37,8 +33,13 @@ variable "name" {
 variable "runtime" {
 	type = string
 }
+variable "source_directory" {
+	default = ""
+	type = string
+}
 
 locals {
+	archive_path = var.source_directory == "" ? path.module : var.source_directory
 	lambda_zip = "terraform_lambda.zip"
 }
 
@@ -49,8 +50,8 @@ data "archive_file" "default" {
 		"main.tf",
 		local.lambda_zip,
 	]
-	output_path = "${var.directory}/${local.lambda_zip}"
-	source_dir = var.directory
+	output_path = "${local.archive_path}/${local.lambda_zip}"
+	source_dir = local.archive_path
 	type = "zip"
 }
 data "aws_iam_policy_document" "default" {
