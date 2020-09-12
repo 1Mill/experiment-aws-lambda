@@ -18,6 +18,7 @@ terraform {
 }
 
 variable "directory" {
+	default = path.module
 	type = string
 }
 variable "environment" {
@@ -48,8 +49,8 @@ data "archive_file" "default" {
 		"main.tf",
 		local.lambda_zip,
 	]
-	output_path = "${path.module}/${local.lambda_zip}"
-	source_dir = "${path.module}/${var.directory}"
+	output_path = "${var.directory}/${local.lambda_zip}"
+	source_dir = var.directory
 	type = "zip"
 }
 data "aws_iam_policy_document" "default" {
