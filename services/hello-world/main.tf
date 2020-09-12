@@ -35,6 +35,9 @@ variable "environment" {
 		value = string
 	}))
 }
+variable "handler" {
+	type = string
+}
 variable "runtime" {
 	type = string
 }
@@ -72,7 +75,7 @@ resource "aws_iam_role" "default" {
 resource "aws_lambda_function" "default" {
 	filename = local.lambda_zip
 	function_name = "MyPlaceholderFunctionName"
-	handler = "index.handler"
+	handler = var.handler
 	role = aws_iam_role.default.arn
 	runtime = var.runtime
 	source_code_hash = data.archive_file.default.output_base64sha256
