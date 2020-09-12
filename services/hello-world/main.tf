@@ -28,6 +28,14 @@ provider "aws" {
 	region = "us-west-1"
 }
 
+variable "environment" {
+	default = []
+	type = list(object({
+		key = string
+		value = string
+	}))
+}
+
 data "archive_file" "default" {
 	excludes = [
 		".terraform",
@@ -65,4 +73,9 @@ resource "aws_lambda_function" "default" {
 	role = aws_iam_role.default.arn
 	runtime = "nodejs12.x"
 	source_code_hash = data.archive_file.default.output_base64sha256
+
+	environment {
+		// * Environmental keys must not container hyphens "-" https://stackoverflow.com/a/60885479
+		variables = merge([for env in var.environment: { (env["key"]) = (env["value"]) }]...)
+	}
 }
