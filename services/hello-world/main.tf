@@ -21,6 +21,10 @@ terraform {
 			source = "hashicorp/aws"
 			version = "~> 3.5.0"
 		}
+		random = {
+			source = "hashicorp/random"
+			version = "~> 2.3.0"
+		}
 	}
 }
 
@@ -38,8 +42,16 @@ variable "environment" {
 variable "handler" {
 	type = string
 }
+variable "name" {
+	type = string
+}
 variable "runtime" {
 	type = string
+}
+
+locals {
+	function_name_prefix = "${var.name}--"
+	lambda_zip = "terraform_lambda.zip"
 }
 
 data "archive_file" "default" {
@@ -66,15 +78,12 @@ data "aws_iam_policy_document" "default" {
 		}
 	}
 }
-locals {
-	lambda_zip = "terraform_lambda.zip"
-}
 resource "aws_iam_role" "default" {
 	assume_role_policy = data.aws_iam_policy_document.default.json
 }
 resource "aws_lambda_function" "default" {
 	filename = local.lambda_zip
-	function_name = "MyPlaceholderFunctionName"
+	function_name = random_id.default.b64_url
 	handler = var.handler
 	role = aws_iam_role.default.arn
 	runtime = var.runtime
@@ -84,4 +93,8 @@ resource "aws_lambda_function" "default" {
 		// * Environmental keys must not container hyphens "-" https://stackoverflow.com/a/60885479
 		variables = merge([for env in var.environment: { (env["key"]) = (env["value"]) }]...)
 	}
+}
+resource "random_id" "default" {
+	byte_length = 62 - (length(base64encode(local.function_name_prefix)))
+	prefix = local.function_name_prefix
 }
