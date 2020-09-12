@@ -29,4 +29,5 @@ module "lambda" {
 	handler = "index.handler"
 	name = "my-example-function"
 	runtime = "nodejs12.x"
+	source_directory = "${path.module}"
 }
