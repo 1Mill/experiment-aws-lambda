@@ -11,13 +11,11 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 
 	// * Buisness logic
 	const { name } = cloudevent.data
-	const payload = {
+	const enrichment = {
 		isEnabled: FLAGS[name] || false,
 		name,
 	}
 
-	console.log(payload)
-
 	// ! Testing purposes only for InvocationType: 'RequestResponse'
-	return payload
+	return enrichment
 }
