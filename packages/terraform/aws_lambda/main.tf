@@ -49,7 +49,7 @@ data "archive_file" "default" {
 		local.lambda_zip,
 	]
 	output_path = "${path.module}/${local.lambda_zip}"
-	source_dir = "${path.module}/${directory}"
+	source_dir = "${path.module}/${var.directory}"
 	type = "zip"
 }
 data "aws_iam_policy_document" "default" {
