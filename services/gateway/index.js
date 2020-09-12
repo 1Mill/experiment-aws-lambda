@@ -29,14 +29,14 @@ rapids.listen({
 			err ? console.error(err, err.stack) : console.log(data)
 		})
 	},
-	types: ['testing.2020-09-09']
+	types: ['is-feature-flag-enabled.2020-09-12']
 })
 
 // * Emit events to rapids
 setInterval(() =>{
 	const cloudevent = createCloudevent({
-		data: { myData: 'exists' },
-		type: 'testing.2020-09-09',
+		data: { name: 'my-flag' },
+		type: 'is-feature-flag-enabled.2020-09-12',
 	})
 	rapids.emit({ cloudevent })
 }, 5000)
