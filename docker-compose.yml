@@ -22,7 +22,7 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_DEFAULT_REGION: us-west-1
-      AWS_LAMBDA_ARN: arn:aws:lambda:us-west-1:076550078650:function:MyPlaceholderFunctionName
+      AWS_LAMBDA_ARN: arn:aws:lambda:us-west-1:076550078650:function:my-example-function--e62e7c67c067a10717bf4063eaff227532139c48a5b
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       CLOUDEVENTS_RAPIDS_PROTOCOL: kafka
       CLOUDEVENTS_RAPIDS_URLS: rapids:9092

@@ -22,7 +22,7 @@ rapids.listen({
 	handler: ({ cloudevent }) => {
 		const params = {
 			FunctionName: process.env.AWS_LAMBDA_ARN,
-			InvocationType: 'Event',
+			InvocationType: 'RequestResponse',
 			Payload: JSON.stringify({ cloudevent }),
 		}
 		lambda.invoke(params, (err, data) => {
