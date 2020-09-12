@@ -7,6 +7,6 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 	// Buisness logic
 	console.log('EVENT: \n' + JSON.stringify(cloudevent, null, 2))
 
-	// ! Testing purposes only
+	// ! Testing purposes only for InvocationType: 'RequestResponse'
 	return cloudevent
 }
