@@ -11,6 +11,12 @@ terraform {
 		encrypt = true
 		key = "example-aws-lambda/hello-world/terraform.tfstate"
 	}
+	required_providers {
+		aws = {
+			source = "hashicorp/aws"
+			version = "~> 3.5.0"
+		}
+	}
 }
 
 provider "aws" {
