@@ -29,8 +29,14 @@ provider "aws" {
 }
 
 data "archive_file" "default" {
+	excludes = [
+		".terraform",
+		"event.json",
+		"main.tf",
+		local.lambda_zip,
+	]
 	output_path = "${path.module}/${local.lambda_zip}"
-	source_file = "${path.module}/index.js"
+	source_dir = "${path.module}"
 	type = "zip"
 }
 data "aws_iam_policy_document" "default" {
