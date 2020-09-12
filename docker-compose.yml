@@ -39,6 +39,17 @@ services:
     volumes:
       - ./services/hello-world:/var/task
 
+  feature-flags:
+    command: index.handler
+    environment:
+      DOCKER_LAMBDA_STAY_OPEN: 1
+    image: lambci/lambda:nodejs12.x
+    # image: node:12-alpine
+    ports:
+      - 9002:9001
+    volumes:
+      - ./services/feature-flags:/var/task
+
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.1
     environment:

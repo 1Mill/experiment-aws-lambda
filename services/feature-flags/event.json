@@ -1,0 +1,10 @@
+{
+  "cloudevent": {
+    "data": { "name": "another-my-flag" },
+    "datacontenttype": "application/json",
+    "dlx": "dlx",
+    "specversion": "1.0",
+    "time": "2020-09-10T04:47:05.416Z",
+    "type": "is-feature-flag-enabled.2020-09-12"
+  }
+}
