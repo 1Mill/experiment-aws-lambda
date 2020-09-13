@@ -42,6 +42,8 @@ services:
   feature-flags:
     command: index.handler
     environment:
+      CLOUDEVENTS_RAPIDS_PROTOCOL: kafka
+      CLOUDEVENTS_RAPIDS_URLS: rapids:9092
       DOCKER_LAMBDA_STAY_OPEN: 1
     image: lambci/lambda:nodejs12.x
     # image: node:12-alpine
