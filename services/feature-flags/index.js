@@ -28,7 +28,7 @@ const getFeatureFlagState = ({ flags, name }) => {
 exports.handler = async ({ cloudevent }, _context, _callback) => {
 	try {
 		// * Escape clauses
-		if (isEnriched({ cloudevent })) { return; }
+		if (isEnriched({ cloudevent })) { return }
 
 		// * Business logic
 		const { name } = JSON.parse(cloudevent.data);
@@ -37,7 +37,7 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 		// * Publish enriched event to rapids
 		rapids.emit({
 			cloudevent: enrich({ cloudevent, enrichment })
-		});
+		})
 
 		// ! Testing purposes only for InvocationType: 'RequestResponse'
 		return enrich({ cloudevent, enrichment })
