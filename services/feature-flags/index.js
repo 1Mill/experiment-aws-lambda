@@ -26,18 +26,22 @@ const getFeatureFlagState = ({ flags, name }) => {
 }
 
 exports.handler = async ({ cloudevent }, _context, _callback) => {
-	// * Escape clauses
-	if (isEnriched({ cloudevent })) { return }
+	try {
+		// * Escape clauses
+		if (isEnriched({ cloudevent })) { return; }
 
-	// * Business logic
-	const { name } = JSON.parse(cloudevent.data)
-	const enrichment = getFeatureFlagState({ flags: FLAGS, name })
+		// * Business logic
+		const { name } = JSON.parse(cloudevent.data);
+		const enrichment = getFeatureFlagState({ flags: FLAGS, name });
 
-	// * Publish enriched event to rapids
-	rapids.emit({
-		cloudevent: enrich({ cloudevent, enrichment })
-	})
+		// * Publish enriched event to rapids
+		rapids.emit({
+			cloudevent: enrich({ cloudevent, enrichment })
+		});
 
-	// ! Testing purposes only for InvocationType: 'RequestResponse'
-	return enrich({ cloudevent, enrichment })
+		// ! Testing purposes only for InvocationType: 'RequestResponse'
+		return enrich({ cloudevent, enrichment })
+	} catch (err) {
+		console.error(err)
+	}
 }
