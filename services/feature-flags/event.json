@@ -3,6 +3,8 @@
     "data": "{\"name\":\"my-flag\"}",
     "datacontenttype": "application/json",
     "dlx": "dlx",
+    "id": "my-uuid",
+    "source": "my-uuid-source",
     "specversion": "1.0",
     "time": "2020-09-10T04:47:05.416Z",
     "type": "is-feature-flag-enabled.2020-09-12"
