@@ -31,3 +31,7 @@ module "lambda" {
 	runtime = "nodejs12.x"
 	source_directory = "${path.module}"
 }
+
+output "arn" {
+	value = module.lambda.arn
+}
