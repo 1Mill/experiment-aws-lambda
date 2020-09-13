@@ -11,11 +11,15 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 
 	// * Buisness logic
 	const { name } = JSON.parse(cloudevent.data)
-	const enrichment = {
-		isEnabled: FLAGS[name] || false,
-		name,
-	}
+	const enrichment = getFeatureFlagState({ flags: FLAGS, name })
+
+	// TODO: Emit enriched event to rapids
+	// rapids.emit({ cloudevent: enrich(cloudevent, enrichment )})
 
 	// ! Testing purposes only for InvocationType: 'RequestResponse'
 	return enrichment
+}
+
+const getFeatureFlagState = ({ flags, name }) => {
+	return { isEnabled: flags[name], name };
 }
