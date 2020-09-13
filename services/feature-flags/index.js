@@ -25,7 +25,7 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 	rapids.emit({ cloudevent: enrich(cloudevent, enrichment) })
 
 	// ! Testing purposes only for InvocationType: 'RequestResponse'
-	return enrichment
+	return enrich(cloudevent, enrichment)
 }
 
 const FLAGS = {
