@@ -84,3 +84,7 @@ resource "aws_lambda_function" "default" {
 resource "random_id" "default" {
 	byte_length = 32
 }
+
+output "arn" {
+	value = aws_lambda_function.default.arn
+}
