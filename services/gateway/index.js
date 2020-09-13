@@ -26,7 +26,10 @@ rapids.listen({
 			Payload: JSON.stringify({ cloudevent }),
 		}
 		lambda.invoke(params, (err, data) => {
-			err ? console.error(err, err.stack) : console.log(data)
+			const datetime = new Date().toISOString()
+			err
+				? console.error(datetime, err, err.stack)
+				: console.log(datetime, data)
 		})
 	},
 	types: ['is-feature-flag-enabled.2020-09-12']
