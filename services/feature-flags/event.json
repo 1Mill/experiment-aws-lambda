@@ -1,6 +1,6 @@
 {
   "cloudevent": {
-    "data": { "name": "another-my-flag" },
+    "data": "{\"name\":\"my-flag\"}",
     "datacontenttype": "application/json",
     "dlx": "dlx",
     "specversion": "1.0",
