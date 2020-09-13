@@ -13,6 +13,18 @@ const rapids = createEventStream({
 	username: process.env.CLOUDEVENTS_RAPIDS_USERNAME,
 })
 
+const FLAGS = {
+	'another-my-flag': false,
+	'my-flag': true,
+}
+
+const getFeatureFlagState = ({ flags, name }) => {
+	return {
+		isEnabled: flags[name] || false,
+		name,
+	}
+}
+
 exports.handler = async ({ cloudevent }, _context, _callback) => {
 	// * Escape clauses
 	if (isEnriched({ cloudevent })) { return }
@@ -22,16 +34,10 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 	const enrichment = getFeatureFlagState({ flags: FLAGS, name })
 
 	// * Publish enriched event to rapids
-	rapids.emit({ cloudevent: enrich(cloudevent, enrichment) })
+	rapids.emit({
+		cloudevent: enrich({ cloudevent, enrichment })
+	})
 
 	// ! Testing purposes only for InvocationType: 'RequestResponse'
-	return enrich(cloudevent, enrichment)
-}
-
-const FLAGS = {
-	'another-my-flag': false,
-	'my-flag': true,
-}
-const getFeatureFlagState = ({ flags, name }) => {
-	return { isEnabled: flags[name], name };
+	return enrich({ cloudevent, enrichment })
 }
