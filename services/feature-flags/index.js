@@ -1,6 +1,6 @@
-const { v2: {
+const { v3: {
 	createEventStream,
-	enrich,
+	enrichCloudevent,
 	isEnriched,
 } } = require('@1mill/cloudevents')
 
@@ -32,15 +32,15 @@ exports.handler = async ({ cloudevent }, _context, _callback) => {
 
 		// * Business logic
 		const { name } = JSON.parse(cloudevent.data);
-		const enrichment = getFeatureFlagState({ flags: FLAGS, name });
+		const enrichmentdata = getFeatureFlagState({ flags: FLAGS, name });
 
 		// * Publish enriched event to rapids
-		rapids.emit({
-			cloudevent: enrich({ cloudevent, enrichment })
-		})
+		// rapids.emit({
+		// 	cloudevent: enrichCloudevent({ cloudevent, enrichmentdata })
+		// })
 
 		// ! Testing purposes only for InvocationType: 'RequestResponse'
-		return enrich({ cloudevent, enrichment })
+		return enrichCloudevent({ cloudevent, enrichmentdata })
 	} catch (err) {
 		console.error(err)
 	}
