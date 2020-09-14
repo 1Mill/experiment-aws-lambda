@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@1mill/cloudevents": "^0.8.5"
+    "@1mill/cloudevents": "^0.8.6"
   }
 }
