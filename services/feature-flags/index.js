@@ -19,8 +19,8 @@ const FLAGS = {
 }
 
 const isFlagEnabled = ({ flags, name }) => {
-	return (flags && flags[name]) || false;
-};
+	return (flags && flags[name]) || false
+}
 
 exports.handler = lambda.handler(async ({ cloudevent, data, isEnriched }) => {
 	try {
@@ -28,7 +28,7 @@ exports.handler = lambda.handler(async ({ cloudevent, data, isEnriched }) => {
 		if (isEnriched) { return }
 
 		// * Contracted inputs
-		const { name } = data;
+		const { name } = data
 
 		// * Business logic
 		const isEnabled = isFlagEnabled({ flags: FLAGS, name })
