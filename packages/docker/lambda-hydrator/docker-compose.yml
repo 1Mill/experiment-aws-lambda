@@ -8,3 +8,8 @@ services:
       NODE_ENV: develompent
     volumes:
       - ./:/app
+
+  test:
+    image: docker.pkg.github.com/experiment-aws-lambda:${VERSION-development}
+    environment:
+      NODE_ENV: production
