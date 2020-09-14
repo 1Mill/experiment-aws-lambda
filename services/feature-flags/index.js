@@ -1,9 +1,9 @@
 const { v3: {
 	createEventStream,
 	enrichCloudevent,
-	isEnriched,
 } } = require('@1mill/cloudevents')
 
+const lambda = createEventStream({ protocol: 'lambda' })
 const rapids = createEventStream({
 	id: 'feature-flags-service',
 	mechanism: process.env.CLOUDEVENTS_RAPIDS_MECHANISM,
@@ -18,30 +18,35 @@ const FLAGS = {
 	'my-flag': true,
 }
 
-const getFeatureFlagState = ({ flags, name }) => {
-	return {
-		isEnabled: flags[name] || false,
-		name,
-	}
-}
+const isFlagEnabled = ({ flags, name }) => {
+	return (flags && flags[name]) || false;
+};
 
-exports.handler = async ({ cloudevent }, _context, _callback) => {
+exports.handler = lambda.handler(async ({ cloudevent, data, isEnriched }) => {
 	try {
 		// * Escape clauses
-		if (isEnriched({ cloudevent })) { return }
+		if (isEnriched) { return }
+
+		// * Contracted inputs
+		const { name } = data;
 
 		// * Business logic
-		const { name } = JSON.parse(cloudevent.data);
-		const enrichmentdata = getFeatureFlagState({ flags: FLAGS, name });
+		const isEnabled = isFlagEnabled({ flags: FLAGS, name })
 
-		// * Publish enriched event to rapids
-		// rapids.emit({
-		// 	cloudevent: enrichCloudevent({ cloudevent, enrichmentdata })
-		// })
+		// * Contracted outputs
+		const enrichmentdata = {
+			isEnabled,
+			name,
+		}
 
-		// ! Testing purposes only for InvocationType: 'RequestResponse'
-		return enrichCloudevent({ cloudevent, enrichmentdata })
+		// * Enrich and emit back to rapids
+		await rapids.emit({
+			cloudevent: enrichCloudevent({
+				cloudevent,
+				enrichmentdata,
+			})
+		})
 	} catch (err) {
 		console.error(err)
 	}
-}
+})
