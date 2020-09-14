@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: docker.pkg.github.com/experiment-aws-lambda:${VERSION-development}
+    image: docker.pkg.github.com/1mill/experiment-aws-lambda/lambda-hydrator:${VERSION-development}
     build: .
     environment:
       NODE_ENV: develompent
@@ -10,6 +10,6 @@ services:
       - ./:/app
 
   test:
-    image: docker.pkg.github.com/experiment-aws-lambda:${VERSION-development}
+    image: docker.pkg.github.com/1mill/experiment-aws-lambda/lambda-hydrator:${VERSION-development}
     environment:
       NODE_ENV: production
