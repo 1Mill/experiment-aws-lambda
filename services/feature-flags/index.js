@@ -21,7 +21,7 @@ const FLAGS = {
 const isFlagEnabled = ({ flags, name }) => {
 	return (flags && flags[name]) || false
 }
-const main = async ({ cloudevent, data, isEnriched }) => {
+exports.handler = lambda.handler(async ({ cloudevent, data, isEnriched }) => {
 	try {
 		// * Escape clauses
 		if (isEnriched) { return }
@@ -48,6 +48,4 @@ const main = async ({ cloudevent, data, isEnriched }) => {
 	} catch (err) {
 		console.error(err)
 	}
-}
-
-exports.handler = lambda.handler(async (params) => await main(params))
+})
