@@ -1,9 +1,10 @@
 const { v3: {
+	PROTOCOL_LAMBDA,
 	createEventStream,
 	enrichCloudevent,
 } } = require('@1mill/cloudevents')
 
-const lambda = createEventStream({ protocol: 'lambda' })
+const lambda = createEventStream({ protocol: PROTOCOL_LAMBDA })
 const rapids = createEventStream({
 	id: 'feature-flags-service',
 	mechanism: process.env.CLOUDEVENTS_RAPIDS_MECHANISM,
