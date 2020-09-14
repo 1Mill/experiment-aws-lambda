@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   app:
+    image: docker.pkg.github.com/experiment-aws-lambda:${VERSION-development}
     build: .
     environment:
       NODE_ENV: develompent
