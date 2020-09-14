@@ -21,7 +21,17 @@ const rapids = createEventStream({
 
 rapids.listen({
 	handler: ({ cloudevent }) => {
-		console.log(cloudevent)
+		const params = {
+			FunctionName: process.env.AWS_LAMBDA_ARN,
+			InvocationType: 'Event',
+			Payload: JSON.stringify({ cloudevent }),
+		}
+		lambda.invoke(params, (err, data) => {
+			const datetime = new Date().toISOString()
+			err
+				? console.error(datetime, err, err.stack)
+				: console.log(datetime, data)
+		})
 	},
 	types: (process.env.CLOUDEVENT_TYPES || '').split(','),
 })
