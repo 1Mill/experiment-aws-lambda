@@ -11,12 +11,12 @@ AWS.config.update({
 const lambda = new AWS.Lambda({ apiVersion: '2015-03-31' })
 
 const rapids = createEventStream({
-	id: process.env.CLOUDEVENT_ID,
-	mechanism: process.env.CLOUDEVENT_MECHANISM,
-	password: process.env.CLOUDEVENT_PASSWORD,
-	protocol: process.env.CLOUDEVENT_PROTOCOL,
-	urls: (process.env.CLOUDEVENT_URLS || '').split(','),
-	username: process.env.CLOUDEVENT_USERNAME,
+	id: process.env.CLOUDEVENTS_ID,
+	mechanism: process.env.CLOUDEVENTS_MECHANISM,
+	password: process.env.CLOUDEVENTS_PASSWORD,
+	protocol: process.env.CLOUDEVENTS_PROTOCOL,
+	urls: (process.env.CLOUDEVENTS_URLS || '').split(','),
+	username: process.env.CLOUDEVENTS_USERNAME,
 })
 
 rapids.listen({
@@ -33,5 +33,5 @@ rapids.listen({
 				: console.log(datetime, data)
 		})
 	},
-	types: (process.env.CLOUDEVENT_TYPES || '').split(','),
+	types: (process.env.CLOUDEVENTS_TYPES || '').split(','),
 })
