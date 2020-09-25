@@ -16,15 +16,14 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
   emitter:
+    command: sh -c "npm run start"
     environment:
       CLOUDEVENTS_RAPIDS_PROTOCOL: kafka
       CLOUDEVENTS_RAPIDS_URLS: rapids:9092
-      DOCKER_LAMBDA_STAY_OPEN: 1
-    image: lambci/lambda:nodejs12.x
     image: node:12-alpine
     volumes:
-      - ./services/emitter:/var/task
-    working_dir: /var/task
+      - ./services/emitter:/app
+    working_dir: /app
 
   gateway:
     build: ./services/gateway
@@ -44,13 +43,15 @@ services:
     image: docker.pkg.github.com/1mill/experiment-aws-lambda/lambda-hydrator:${VERSION-development}
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_LAMBDA_ARN: arn:aws:lambda:us-west-1:076550078650:function:feature-flags--b7d458f3e160d793fe95236531b81552f52d2208d8df339d3
       AWS_REGION: us-west-1
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       CLOUDEVENTS_ID: lambda-h-service
       CLOUDEVENTS_PROTOCOL: kafka
       CLOUDEVENTS_TYPES: is-feature-flag-enabled.2020-09-12
       CLOUDEVENTS_URLS: rapids:9092
+      LAMBDA_ENDPOINT: localhost:9001
+      LAMBDA_FUNCTIONNAME: index.handler
+      # LAMBDA_FUNCTIONNAME: arn:aws:lambda:us-west-1:076550078650:function:feature-flags--b7d458f3e160d793fe95236531b81552f52d2208d8df339d3
 
   hello-world:
     command: index.handler
