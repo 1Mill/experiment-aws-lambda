@@ -25,3 +25,12 @@ setInterval(() => {
 		console.error(err)
 	}
 }, 5000)
+
+rapids.listen({
+	handler: ({ cloudevent, isEnriched }) => {
+		if (isEnriched) { return }
+
+		console.log(JSON.stringify(cloudevent, null, 2))
+	},
+	types: ['is-feature-flag-enabled.2020-09-12'],
+})
