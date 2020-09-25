@@ -16,13 +16,12 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
   emitter:
-    command: index.handler
     environment:
       CLOUDEVENTS_RAPIDS_PROTOCOL: kafka
       CLOUDEVENTS_RAPIDS_URLS: rapids:9092
       DOCKER_LAMBDA_STAY_OPEN: 1
     image: lambci/lambda:nodejs12.x
-    # image: node:12-alpine
+    image: node:12-alpine
     volumes:
       - ./services/emitter:/var/task
     working_dir: /var/task
