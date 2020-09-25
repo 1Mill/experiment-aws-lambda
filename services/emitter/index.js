@@ -15,10 +15,11 @@ setInterval(() => {
 
 		console.log(`Emitting id: ${id}`);
 		const cloudevent = createCloudevent({
+			data: { name: 'my-flag' },
 			id,
-			source: 'emitter',
-			type: 'hello-world',
-		});
+			source: 'service.emitter',
+			type: 'is-feature-flag-enabled.2020-09-12',
+		})
 		rapids.emit({ cloudevent })
 	} catch (err) {
 		console.error(err)
