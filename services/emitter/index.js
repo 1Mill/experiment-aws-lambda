@@ -28,7 +28,7 @@ setInterval(() => {
 
 rapids.listen({
 	handler: ({ cloudevent, isEnriched }) => {
-		if (isEnriched) { return }
+		if (!isEnriched) { return }
 
 		console.log(JSON.stringify(cloudevent, null, 2))
 	},
