@@ -32,10 +32,11 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_DEFAULT_REGION: us-west-1
-      AWS_LAMBDA_ARN: arn:aws:lambda:us-west-1:076550078650:function:feature-flags--b7d458f3e160d793fe95236531b81552f52d2208d8df339d3
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       CLOUDEVENTS_RAPIDS_PROTOCOL: kafka
       CLOUDEVENTS_RAPIDS_URLS: rapids:9092
+      LAMBDA_ENDPOINT: feature-flags:9001
+      LAMBDA_FUNCTIONNAME: index.handler
     volumes:
       - ./services/gateway:/app
 
@@ -49,7 +50,7 @@ services:
       CLOUDEVENTS_PROTOCOL: kafka
       CLOUDEVENTS_TYPES: is-feature-flag-enabled.2020-09-12
       CLOUDEVENTS_URLS: rapids:9092
-      LAMBDA_ENDPOINT: localhost:9001
+      LAMBDA_ENDPOINT: http://localhost:9002/
       LAMBDA_FUNCTIONNAME: index.handler
       # LAMBDA_FUNCTIONNAME: arn:aws:lambda:us-west-1:076550078650:function:feature-flags--b7d458f3e160d793fe95236531b81552f52d2208d8df339d3
 
